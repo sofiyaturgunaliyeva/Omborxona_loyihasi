@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  {% load static %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Products</title>
@@ -8,11 +9,11 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
   <!-- IonIcons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -83,7 +84,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/clients/" class="nav-link">
+            <a href="/mijozlar/" class="nav-link">
               <i class="nav-icon far fa-circle text-danger"></i>
               <p class="text">Clients</p>
             </a>
@@ -143,12 +144,14 @@
                     <tbody>
                         <tr>
                             <th scope="row">1</th>
-                            <td>Un</td>
-                            <td>Qozoq Oliy navi</td>
-                            <td>530000 so'm</td>
-                            <td>50</td>
+                            {% for mahsulot in mahsulotlar %}
+                            <td>{{mahsulot.id}}</td>
+                            <td>{{mahsulot.nom}}</td>
+                            <td>{{mahsulot.brend}}</td>
+                            <td>{{mahsulot.narx}}</td>
                             <td><a href="#"><button type="submit" class="btn btn-danger" data-toggle="modal">Tahrirlash</button></a></td>
                         </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -167,26 +170,39 @@
           </div>
     
           <!-- Modal body -->
-          <form action="#" id="new-product-form" >
+          <form  id="new-product-form" method="post"> {% csrf_token %}
             <div class="modal-body">
-              <label for="new-product-name">Nomi:</label>
-              <input type="text" name="pr_name" placeholder="Mahsulot nomi..." id="new-product-name" class="form-control" required>
+              <label>Nomi:</label>
+              <input type="text" name="nom" placeholder="Mahsulot nomi..." >
               <br>
-              <label for="new-product-name">Brend:</label>
-              <input type="text" name="pr_brand" placeholder="Mahsulot brendi..." id="new-product-brend" class="form-control" required>
+              <label >Brend:</label>
+              <input type="text" name="br" placeholder="Mahsulot brendi..." >
               <br>
-              <label for="new-product-name">Narxi:</label>
-              <input type="text" name="pr_price" placeholder="Maxsulot narxi..." id="new-product-price" class="form-control" required>
+              <label >Narxi:</label>
+              <input type="text" name="narx" placeholder="Maxsulot narxi..." >
               <br>
-              <label for="new-product-name">Miqdori:</label>
-              <input type="number" name="pr_amount" placeholder="Mahsulot miqdori..." id="new-product-amount" class="form-control" required>
+              <label >Miqdori:</label>
+              <input type="number" name="m" placeholder="Mahsulot miqdori...">
+                <br>
+                <select name="olchov">
+                    <option class="opt">dona</option>
+                    <option class="opt">kg</option>
+                    <option class="opt">qop</option>
+                    <option class="opt">blok</option>
+                </select>
+                <br>
+              <label > Sanasi:</label>
+              <input type="date" name="sana" placeholder="Maxsulot sana..." >
+              <br>
+
+
               <br>
             </div>
     
           <!-- Modal footer -->
           <div class="modal-footer">
-            <button type="submit" class="btn btn-success">Qo`shish</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Yopish</button>
+              <button type="submit" class="btn btn-success">Qo`shish</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Yopish</button>
         </div>
       </form>
     
@@ -210,5 +226,7 @@
 <script src="dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard3.js"></script>
-</body>
+
+    </body>
+
 </html>

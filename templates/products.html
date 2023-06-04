@@ -142,14 +142,16 @@
                         </tr>
                     </thead>
                     <tbody>
+                    {% for mahsulot in mahsulotlar %}
                         <tr>
                             <th scope="row">1</th>
-                            {% for mahsulot in mahsulotlar %}
+
                             <td>{{mahsulot.id}}</td>
                             <td>{{mahsulot.nom}}</td>
                             <td>{{mahsulot.brend}}</td>
                             <td>{{mahsulot.narx}}</td>
-                            <td><a href="#"><button type="submit" class="btn btn-danger" data-toggle="modal">Tahrirlash</button></a></td>
+                            <td><a href="/product_edit/{{mahsulot.id}}/"><button type="submit" class="btn btn-warning" data-toggle="modal">Tahrirlash</button></a></td>
+                            <td><a href="/product_delete/{{mahsulot.id}}/"><button type="submit" class="btn btn-danger" data-toggle="modal">O'chirish</button></a></td>
                         </tr>
                     {% endfor %}
                     </tbody>

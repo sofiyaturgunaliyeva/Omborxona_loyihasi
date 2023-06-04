@@ -9,11 +9,11 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
   <!-- IonIcons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -42,9 +42,9 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{% url 'stats' %}">Home</a></li>
+              <li class="breadcrumb-item"><a href="/bolimlar/">Home</a></li>
               <li class="breadcrumb-item active">Products</li>
-              <li class="breadcrumb-item"><a href="{% url 'logout' %}">Logout</a></li>
+              <li class="breadcrumb-item"><a href="/logout/">Logout</a></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -56,23 +56,23 @@
           <!-- Modal Header -->
 
           <!-- Modal body -->
-          <form action="#" id="edit-product-form">
+          <form method="post">{% csrf_token %}
               <label for="edit-product-name">Mahsulot nomi:</label>
-              <input type="text" name="name" value="{{product.name}}" placeholder="Mahsulot nomi..." id="edit-product-name" class="form-control" required>
+              <input type="text" name="nom" value="{{mahsulot.nom}}"  id="edit-product-name" class="form-control" required>
                 <br>
               <label for="edit-product-name">Brend nomi:</label>
-              <input type="text" name="brand_name" value="{{product.brand_name}}" placeholder="Brend nomi..." id="edit-product-brend" class="form-control" required>
+              <input type="text" name="br" value="{{mahsulot.brend}}"  id="edit-product-brend" class="form-control" required>
               <br>
               <label for="edit-product-name">Mahsulot narxi:</label>
-              <input type="number" name="price" value="{{product.price}}" placeholder="Mahsulot narxi..." id="edit-product-price" class="form-control" required>
+              <input type="number" name="narx" value="{{mahsulot.narx}}"  id="edit-product-price" class="form-control" required>
               <br>
-              <label for="edit-product-name">Dona qoldi:</label>
-              <input type="number" name="amount" value="{{product.remainder}}" placeholder="Dona qoldi..." id="edit-product-amount" class="form-control" required>
+              <label for="edit-product-name">Miqdor:</label>
+              <input type="number" name="m" value="{{mahsulot.miqdor}}"  id="edit-product-amount" class="form-control" required>
               <br>
 
           <!-- Modal footer -->
             <button type="submit" class="btn btn-success">Yangilash</button>
-            <a href="/goods/"><button type="button" class="btn btn-danger" data-dismiss="modal">Yopish</button></a>
+            <a href="/mahsulotlar/"><button type="button" class="btn btn-danger" data-dismiss="modal">Yopish</button></a>
 
       </form>
 
